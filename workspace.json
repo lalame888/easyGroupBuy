@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "easy-group-buy": "apps/easy-group-buy",
+    "easy-group-buy-e2e": "apps/easy-group-buy-e2e"
+  }
+}

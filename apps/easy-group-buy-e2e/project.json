@@ -1,0 +1,28 @@
+{
+  "root": "apps/easy-group-buy-e2e",
+  "sourceRoot": "apps/easy-group-buy-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/easy-group-buy-e2e/cypress.json",
+        "devServerTarget": "easy-group-buy:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "easy-group-buy:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/easy-group-buy-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["easy-group-buy"]
+}

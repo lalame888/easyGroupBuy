@@ -1,0 +1,73 @@
+{
+  "root": "apps/easy-group-buy",
+  "sourceRoot": "apps/easy-group-buy/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/easy-group-buy",
+        "index": "apps/easy-group-buy/src/index.html",
+        "baseHref": "/",
+        "main": "apps/easy-group-buy/src/main.tsx",
+        "polyfills": "apps/easy-group-buy/src/polyfills.ts",
+        "tsConfig": "apps/easy-group-buy/tsconfig.app.json",
+        "assets": [
+          "apps/easy-group-buy/src/favicon.ico",
+          "apps/easy-group-buy/src/assets"
+        ],
+        "styles": ["apps/easy-group-buy/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/easy-group-buy/src/environments/environment.ts",
+              "with": "apps/easy-group-buy/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "easy-group-buy:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "easy-group-buy:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/easy-group-buy/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/easy-group-buy"],
+      "options": {
+        "jestConfig": "apps/easy-group-buy/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
