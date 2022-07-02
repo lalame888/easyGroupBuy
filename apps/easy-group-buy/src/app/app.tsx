@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
+import React from 'react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { Route, Router } from 'react-router-dom';
+import {EasyGroupBuy} from './EasyGroupBuy/EasyGroupBuy'
 export function App() {
   return (
-    <>
-      <NxWelcome title="easy-group-buy" />
-      <div />
-    </>
+    <EasyGroupBuy/>
   );
 }
 

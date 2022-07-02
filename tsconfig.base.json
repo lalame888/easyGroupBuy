@@ -10,11 +10,33 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@easy-group-buy/data": [
+        "libs/data/src/index.ts"
+      ],
+      "@easy-group-buy/features": [
+        "libs/features/src/index.ts"
+      ],
+      "@easy-group-buy/redux": [
+        "libs/redux/src/index.ts"
+      ],
+      "@easy-group-buy/ui": [
+        "libs/ui/src/index.ts"
+      ],
+      "@easy-group-buy/utils": [
+        "libs/utils/src/index.ts"
+      ]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
