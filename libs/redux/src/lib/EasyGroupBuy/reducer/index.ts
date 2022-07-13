@@ -1,16 +1,16 @@
-import { PageState, UserInfo } from '@easy-group-buy/data'
-import { CHANGE_PAGE, SET_USER_INFO } from '../action/index'
+import { ChildPage, PageMap, PageState, UserInfo } from '@easy-group-buy/data'
+import { CHANGE_CHILD_PAGE, CHANGE_PAGE, SET_USER_INFO } from '../action/index'
 type StateType = {
   userInfo: UserInfo | undefined,
   hasCheckUserInfo: boolean
-  pageState: PageState,
+  pageSelect: PageMap,
   errorMessage: string
 }
 
 const initState: StateType = {
   userInfo: undefined,
   hasCheckUserInfo: false,
-  pageState: PageState['開團'],
+  pageSelect: new PageMap(PageState['開團']),
   errorMessage: ''
 };
 
@@ -27,8 +27,19 @@ type ActionType = {
       }
       case CHANGE_PAGE : {
         const page: PageState = action.payload.page;
+        const newPage = new PageMap(page)
 
-        return {...state,pageState: page}
+        return {...state,pageSelect: newPage}
+      }
+      case CHANGE_CHILD_PAGE: {
+        const childPage: ChildPage = action.payload.childPage;
+        if (state.pageSelect.childPage.pageName === childPage.pageName) {
+          return state
+        } else {
+          const newPage = state.pageSelect.clone();
+          newPage.childPage = childPage;
+          return {...state,pageSelect: newPage}
+        }
       }
 
       default:
