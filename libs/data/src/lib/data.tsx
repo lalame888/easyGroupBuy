@@ -1,14 +1,21 @@
-import { throws } from "assert";
+
+
+export class Cloneable {
+  public clone() {
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+  }
+}
 
 
 
-export class UserInfo {
+
+export class UserInfo extends Cloneable {
   public pictuerUrl: string| undefined;
   constructor(
     public readonly userName: string,
     public readonly loginId: string
   ) {
-
+    super();
   }
 }
 
@@ -31,12 +38,13 @@ export type ChildPage = {
   default?: boolean
 }
 
-export class PageMap  {
+export class PageMap  extends Cloneable {
   public childPage: ChildPage;
 
   constructor(
     public pageState:PageState
   ) {
+    super();
     this.childPage = this.getDefaultChild(this.getChildPageMenu(pageState))
   }
 
@@ -70,10 +78,6 @@ export class PageMap  {
     return array.find((child)=> child.default) || array[0]
   }
 
-  public clone(): PageMap {
-    const newPage: PageMap = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
-    return newPage;
-  }
   
 }
 

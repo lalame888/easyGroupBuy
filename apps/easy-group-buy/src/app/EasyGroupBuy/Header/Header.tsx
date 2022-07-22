@@ -1,16 +1,16 @@
-import { PageMap, PageState, UserInfo } from "@easy-group-buy/data";
-import { Action, RootState } from "@easy-group-buy/redux";
+import { PageState, UserInfo } from "@easy-group-buy/data";
+import { Action, useReduxSelector } from "@easy-group-buy/redux";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { CSSProperties } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 export function Header() {
     const dispatch = useDispatch();
-    const pageState: PageState = useSelector((state: RootState)=> state.pageSelect.pageState);
-    const userInfo: UserInfo | undefined = useSelector((state: RootState)=> state.userInfo);
+    const pageState: PageState = useReduxSelector((state)=> state.pageSelect.pageState);
+    const userInfo: UserInfo | undefined = useReduxSelector((state)=> state.userInfo);
     const appName = `輕鬆開好團`;
     const loginUrl = '../login';
     const style: CSSProperties = {

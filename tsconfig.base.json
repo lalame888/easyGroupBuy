@@ -24,6 +24,9 @@
       "@easy-group-buy/features": [
         "libs/features/src/index.ts"
       ],
+      "@easy-group-buy/interface": [
+        "libs/interface/src/index.ts"
+      ],
       "@easy-group-buy/redux": [
         "libs/redux/src/index.ts"
       ],

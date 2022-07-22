@@ -5,6 +5,7 @@
     "easy-group-buy": "apps/easy-group-buy",
     "easy-group-buy-e2e": "apps/easy-group-buy-e2e",
     "features": "libs/features",
+    "interface": "libs/interface",
     "redux": "libs/redux",
     "ui": "libs/ui",
     "utils": "libs/utils"
