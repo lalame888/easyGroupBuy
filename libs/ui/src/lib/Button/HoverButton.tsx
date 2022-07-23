@@ -17,11 +17,14 @@ export function HoverButton(props:HoverButtonProps): JSX.Element {
         backgroundColor: '#f5f5f5'
     } : undefined
     const style: CSSProperties = {
+        wordBreak: 'keep-all',
         userSelect: 'none',
         padding: '5px 15px',
         cursor: 'pointer',
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
+
         ...changeStyle,
         ...disableStyle
     }

@@ -1,4 +1,5 @@
 
+import { THEME } from "@easy-group-buy/data";
 import { CSSProperties, useState } from "react"
 
 interface ChildMenuButtonProps {
@@ -26,10 +27,11 @@ export function ChildMenuButton(props: ChildMenuButtonProps){
     }
     const style: CSSProperties = {
         width: '150px',
+        wordBreak:'keep-all',
         display:'inline-flex',
         justifyContent: 'center',
         padding:'15px 20px',
-        border: '1px solid #489A81',
+        border: THEME.broder,
         cursor: 'pointer',
         fontSize: '14px',
         ...props.style,

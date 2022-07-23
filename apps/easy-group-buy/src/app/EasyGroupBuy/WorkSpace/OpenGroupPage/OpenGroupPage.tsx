@@ -17,7 +17,7 @@ export function OpenGroupPage(){
     const pageSelect: PageMap = useReduxSelector((state)=> state.pageSelect);
     const childPage: ChildPage  = pageSelect.childPage;
     const menuStyle: CSSProperties = {
-        marginBottom: '80px',
+        marginBottom: '50px',
         display: 'flex', 
         justifyContent: 'center'
     }

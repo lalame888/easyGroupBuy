@@ -110,6 +110,8 @@ export class GroupBuyObject extends Cloneable {
   private userOrder: Array<OrderData> = []; //目前提交的團單
   public openOrderView: boolean = true; // 開放別人觀看團單
   public endTime: Date | undefined = undefined; // 結束時間
+  public deleteTime: Date | undefined = undefined; // 被刪除的時間
+
   public uid: string = generateUUID();
   public appendMoney: number = 0 ; //額外費用 ex: 運費之類的
    
@@ -190,6 +192,10 @@ export class GroupBuyObject extends Cloneable {
     return this.joinUserList.length
   }
 
+  get endTimeString(): string {
+    if (this.endTime === undefined) return ''
+    return `${this.endTime.toLocaleDateString()} ${this.endTime.toLocaleTimeString('en-GB')}`
+  }
   
 
 }

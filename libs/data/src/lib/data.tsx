@@ -81,3 +81,8 @@ export class PageMap  extends Cloneable {
   
 }
 
+export const THEME = {
+  broder: '1px solid #489A81',
+  buttonBorderRadius: '30px'
+}
+

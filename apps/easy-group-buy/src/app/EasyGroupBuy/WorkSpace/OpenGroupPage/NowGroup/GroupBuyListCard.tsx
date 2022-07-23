@@ -1,5 +1,5 @@
 
-import { GroupBuyObject, GroupBuyStatus, UserInfo } from "@easy-group-buy/data";
+import { GroupBuyObject, GroupBuyStatus, THEME, UserInfo } from "@easy-group-buy/data";
 import { CSSProperties } from "react"
 import { getKeyByValue } from '@easy-group-buy/utils'
 import { Button } from "react-bootstrap";
@@ -16,28 +16,28 @@ export function GroupBuyListCard(props: GroupBuyListCardProps ){
     const style: CSSProperties = {
         display: 'flex',
         width: '100%',
-        border: '1px #275C4C solid',
+        border: THEME.broder,
         borderRadius: '15px',
         padding: '30px',
         position: 'relative',
         justifyContent: 'space-between',
+        margin: '20px 0px',
         ...props.style
 
     }
     const imageDivStyle: CSSProperties = {
         width: '130px', 
         display: 'flex',
-        justifyContent: 'center',
-        border: '1px solid'
-
+        justifyContent: 'center'
     }
     const imageStyle: CSSProperties = {
         maxWidth: '100%',
         maxHeight: '100%',
-        margin: 'auto'
+        margin: 'auto',
+        minWidth:'130px'
     }
     const infoDivStyle: CSSProperties = {
-        margin:'0px 20px'
+        margin:'0px 30px'
     }
     const tilteStyle: CSSProperties = {
         fontSize: '25px',
@@ -79,18 +79,19 @@ export function GroupBuyListCard(props: GroupBuyListCardProps ){
                     <p style={tilteStyle}>{`${props.groupBuyObject.title} - ${props.groupBuyObject.store.name}`}</p>
                     <p style={infoStyle}>開團人：{props.groupBuyObject.builder.userName}</p>
                     <p style={infoStyle}>參團人數：{props.groupBuyObject.joinListLength}</p>
-                    <p style={infoStyle}>團單狀態：{getKeyByValue(GroupBuyStatus,props.groupBuyObject.statues)}</p>
+                    <p style={infoStyle}>團單狀態：{`${getKeyByValue(GroupBuyStatus,props.groupBuyObject.statues)}
+                    ${(props.groupBuyObject.endTime && props.groupBuyObject.statues === GroupBuyStatus['開放跟團中']) ?
+                         `- 期限：${props.groupBuyObject.endTimeString}` : ''}`}</p>
                 </div>
             </div>
             <div style={buttonDivStyle}>
                 {
+                    (props.groupBuyObject.statues !== GroupBuyStatus['開放跟團中']) ?
+                        <MyHoverButton style={buttonStyle} disabled={true} >不可取消</MyHoverButton>:
                     (props.groupBuyObject.builder.userName === userInfo.userName) ?
                         <MyHoverButton style={buttonStyle} onClick={deleteGroup}>刪除團單</MyHoverButton>
-                    : (props.groupBuyObject.statues === GroupBuyStatus['開放跟團中']) ? 
-                        <MyHoverButton style={buttonStyle} onClick={cancleOrder}>取消跟團</MyHoverButton>:
-                        <MyHoverButton style={buttonStyle} disabled={true} >不可取消</MyHoverButton>
-
-
+                    : (props.groupBuyObject.statues === GroupBuyStatus['開放跟團中']) &&
+                        <MyHoverButton style={buttonStyle} onClick={cancleOrder}>取消跟團</MyHoverButton>
                 }
                 <MyHoverButton style={buttonStyle}>查看訂單</MyHoverButton>
 
