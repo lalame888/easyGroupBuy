@@ -1,30 +1,17 @@
 
 import { THEME } from "@easy-group-buy/data";
 import { CSSProperties, useState } from "react"
+import { NavLink } from "react-router-dom";
 
 interface ChildMenuButtonProps {
     style?: CSSProperties
-    active?: boolean
     buttonText: string;
-    onClick?(): void
+    to: string
 }
 
 export function ChildMenuButton(props: ChildMenuButtonProps){
     const [hover, setHover] = useState<boolean>(false);
-    function getStyle(): CSSProperties{
-        if (props.active) {
-            return {
-                backgroundColor: '#FFEEB0'
-            }
-        } else if (hover) {
-            return{
-                backgroundColor: '#FEFFD8'
-            }
-        }
-        else {
-            return {}
-        }
-    }
+    
     const style: CSSProperties = {
         width: '150px',
         wordBreak:'keep-all',
@@ -34,18 +21,23 @@ export function ChildMenuButton(props: ChildMenuButtonProps){
         border: THEME.broder,
         cursor: 'pointer',
         fontSize: '14px',
-        ...props.style,
-        ...getStyle() // 根據狀態決定目前樣子（顏色）
+        color: '#212529',
+        textDecoration:'none',
+        ...props.style
     }
     
     return(
-        <div 
-            onClick={props.onClick} 
-            style={style}
+        <NavLink 
+            to={props.to} 
+            style={(p)=> {
+                if (p.isActive) return {...style,backgroundColor: '#FFEEB0'}
+                else if (hover) return {...style,backgroundColor: '#FEFFD8'}
+                else  return style
+            }}
             onMouseEnter={()=>setHover(true)}
             onMouseOut={()=> setHover(false)}
         >
             {props.buttonText}
-        </div>
+        </NavLink>
     )
 }

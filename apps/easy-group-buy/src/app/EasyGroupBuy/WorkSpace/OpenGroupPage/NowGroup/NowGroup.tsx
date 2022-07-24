@@ -1,5 +1,5 @@
 
-import { GroupBuyObject, PageMap, PageState, THEME, UserInfo } from "@easy-group-buy/data";
+import { GroupBuyObject, PageState, THEME, UserInfo } from "@easy-group-buy/data";
 import { serverUtils } from "@easy-group-buy/features";
 import { useReduxSelector } from "@easy-group-buy/redux"
 import { MyHoverButton, SearchInput } from "@easy-group-buy/ui";
@@ -69,7 +69,7 @@ export function NowGroup(){
         textAlign: 'center',
         width: '170px'
     }
-    // TODO 頁面連結的方式還要再想
+    // TODO 頁面連結的方式還要再想 隱藏一個LINK 去觸發他？
     return(
         <div style={style}>
             <div style={searchDivStyle}>

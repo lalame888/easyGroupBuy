@@ -35,50 +35,32 @@ export type ChildPage = {
   '使用說明'|
   '聯絡我們'|
   '關於輕鬆開好團';
-  default?: boolean
+  page: string
 }
 
-export class PageMap  extends Cloneable {
-  public childPage: ChildPage;
-
-  constructor(
-    public pageState:PageState
-  ) {
-    super();
-    this.childPage = this.getDefaultChild(this.getChildPageMenu(pageState))
-  }
-
-  public getChildPageMenu(pageState: PageState = this.pageState): ChildPage[] {
-    switch(pageState) {
-      case PageState['開團']:
-        return [
-          {pageName: '開新團'},
-          {pageName: '跟新團'},
-          {pageName: '目前團單',default: true},
-          {pageName: '歷史團單'},
-          {pageName: '儲存商家'}
-        ];
-      case PageState['使用說明']:
-        return [
-          {pageName: '使用說明'}
-        ]
-      case PageState['聯絡我們']:
+export function getChildPageMenu(pageState: PageState): ChildPage[] {
+  switch(pageState) {
+    case PageState['開團']:
       return [
-        {pageName: '聯絡我們'}
-      ]
-      case PageState['關於輕鬆開好團']:
+        {pageName: '開新團',page: 'NewOpen'},
+        {pageName: '跟新團',page: 'JoinNew'},
+        {pageName: '目前團單',page: 'NowGroup'},
+        {pageName: '歷史團單',page: 'HistoryGroup'},
+        {pageName: '儲存商家',page: 'StroeStore'}
+      ];
+    case PageState['使用說明']:
       return [
-        {pageName: '關於輕鬆開好團'}
+        {pageName: '使用說明',page: 'HelpPage'}
       ]
-    }
+    case PageState['聯絡我們']:
+    return [
+      {pageName: '聯絡我們',page:'ContactUsPage'}
+    ]
+    case PageState['關於輕鬆開好團']:
+    return [
+      {pageName: '關於輕鬆開好團', page: 'Introduction'}
+    ]
   }
-
-  getDefaultChild(array: ChildPage[]): ChildPage  {
-    if (array.length === 0 ) throw new Error(`getDefaultChild 陣列為空`);
-    return array.find((child)=> child.default) || array[0]
-  }
-
-  
 }
 
 export const THEME = {

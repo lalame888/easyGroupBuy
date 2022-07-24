@@ -2,14 +2,15 @@ import { PageState, UserInfo } from "@easy-group-buy/data";
 import { Action, useReduxSelector } from "@easy-group-buy/redux";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 
 export function Header() {
     const dispatch = useDispatch();
-    const pageState: PageState = useReduxSelector((state)=> state.pageSelect.pageState);
+    const [hoverItem, setHoverItem] = useState<PageState | undefined>(undefined);
     const userInfo: UserInfo | undefined = useReduxSelector((state)=> state.userInfo);
     const appName = `輕鬆開好團`;
     const loginUrl = '../login';
@@ -59,7 +60,9 @@ export function Header() {
         height: '50px',
         whiteSpace: 'nowrap',
         minWidth:'140px',
-        userSelect:'none'
+        userSelect:'none',
+        color: '#212529',
+        textDecoration:'none'
     }
     const useingLinkStyle : CSSProperties = {
         ...navLinkStyle,
@@ -83,15 +86,15 @@ export function Header() {
                                 <>
                                     {Object.entries(PageState).map(([key,value])=>{
                                         return (
-                                            <Nav.Link 
+                                            <NavLink 
                                                 key={key}
-                                                style={(pageState ===value)?useingLinkStyle:navLinkStyle}
-                                                onClick={()=>{
-                                                    dispatch(Action.changePage(value))
-                                                }}
-                                        >
-                                           {key}
-                                        </Nav.Link> 
+                                                style={(props)=> (props.isActive || hoverItem === value)?useingLinkStyle:navLinkStyle}
+                                                to={`/${value}`}
+                                                onMouseEnter={()=> setHoverItem(value)}
+                                                onMouseLeave={()=> setHoverItem(undefined)}
+                                            >
+                                                {key}
+                                            </NavLink> 
                                         )
                                     })}
                                 </>
